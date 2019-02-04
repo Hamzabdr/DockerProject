@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+
+  angular:
+    build: AngularApp # definir le répertoire du client 
+    ports:
+      - "5555:5555" # Port 5555 port d'ecoute du client
+
+  node:
+    build: NodeJS # Definir le répertoire du server
+    ports:
+      - "8000:8000" # Port 8000 port d'ecoute du serveur
+    links:
+      - database # Link with mongodb
+    environment:
+      - PORT=8000 # définit le port
+
+  database:
+    image: mongo # image mongo
+    ports:
+      - "27017:27017" # Port mongo 
